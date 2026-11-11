@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <title>Meus pedidos — CantinaTech</title>
+</head>
+<body>
+    
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h1 class="text-danger fw-bold">
+            Pedidos Realizados
+        </h1>
+
+        <p class="text-muted">
+            Consulte, edite ou exclua os pedidos cadastrados.
+        </p>
+
+    </div>
+
+    <a href="/pedido" class="btn btn-danger">
+        Novo Pedido
+    </a>
+
+</div>
+
+<div class="table-responsive">
+
+    <table class="table table-hover table-bordered align-middle">
+
+        <thead class="table-danger">
+
+            <tr>
+
+                <th>Aluno</th>
+                <th>Turma</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Observações</th>
+                <th class="text-center">Ações</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+            {% if orders %}
+                {% for pedido in orders %}
+                <tr>
+                    <td>{{ pedido.nome_aluno or pedido.username }}</td>
+                    <td>{{ pedido.turma or '-' }}</td>
+                    <td>{{ pedido.itens[0].nome }}</td>
+                    <td>{{ pedido.itens[0].quantidade }}</td>
+                    <td>{{ pedido.observacao or '—' }}</td>
+                    <td class="text-center">
+                        <a href="{{ url_for('editar_pedido', order_id=pedido.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="text-center">Nenhum pedido foi cadastrado até o momento.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+</div>
+
+<div class="mt-4">
+
+    <a href="{{ url_for('cardapio') }}" class="btn btn-secondary">
+        Voltar ao cardápio
+    </a>
+
+</div>
+</body>
+</html>

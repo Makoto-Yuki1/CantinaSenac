@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-danger text-white text-center py-3">
+                    <h2 class="mb-0">Editar Pedido</h2>
+                    <p class="mb-0 mt-2">Atualize as informações do pedido.</p>
+                </div>
+                <div class="card-body p-4">
+                    <form action="{{ url_for('editar_pedido', order_id=pedido.id) }}" method="POST">
+                        <div class="mb-4">
+                            <label for="nome" class="form-label fw-bold text-danger">Nome do Aluno</label>
+                            <input type="text" class="form-control form-control-lg" id="nome" name="nome" value="{{ pedido.nome_aluno }}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="turma" class="form-label fw-bold text-danger">Turma</label>
+                            <input type="text" class="form-control form-control-lg" id="turma" name="turma" value="{{ pedido.turma }}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="produto" class="form-label fw-bold text-danger">Produto</label>
+                            <select class="form-select form-select-lg" id="produto" name="item_id" required>
+                                {% for p in menu %}
+                                <option value="{{ p.id }}" {% if p.id == pedido.itens[0].id %}selected{% endif %}>{{ p.nome }} — {{ p.tipo }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="quantidade" class="form-label fw-bold text-danger">Quantidade</label>
+                            <input type="number" class="form-control form-control-lg" id="quantidade" name="quantidade" min="0" value="{{ pedido.itens[0].quantidade }}" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="observacao" class="form-label fw-bold text-danger">Observações</label>
+                            <textarea class="form-control" id="observacao" name="observacao" rows="4">{{ pedido.observacao }}</textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a href="{{ url_for('meus_pedidos') }}" class="btn btn-outline-secondary btn-lg">Cancelar</a>
+                            <button type="submit" class="btn btn-danger btn-lg">Salvar Alterações</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

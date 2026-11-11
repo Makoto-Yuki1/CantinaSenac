@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Logout — Cantina</title>
+      <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="logout-box">
+      <h1>Você deseja sair?</h1>
+      {% if username %}
+        <p>Usuário atual: <strong>{{ username }}</strong></p>
+      {% endif %}
+      <p>Ao confirmar, você será desconectado da sessão.</p>
+
+      <div class="logout-actions">
+        <!-- botão que aciona a rota de logout existente -->
+        <form action="{{ url_for('logout') }}" method="POST" style="display:inline;">
+          <button type="submit" class="zerar">Sair</button>
+        </form>
+
+        <!-- cancelar volta para o cardápio -->
+        <a href="{{ url_for('cardapio') }}">
+          <button type="button">Cancelar</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+   <div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-danger text-white">
+
+                <h2 class="mb-0">
+                    Realizar Pedido
+                </h2>
+
+            </div>
+
+            <div class="card-body">
+
+                <form action="/pedido" method="POST">
+
+                    <div class="mb-3">
+
+                        <label for="nome" class="form-label">
+                            Nome do Aluno
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome"
+                            value="{{ username or '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="turma" class="form-label">
+                            Turma
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="turma"
+                            name="turma"
+                            placeholder="Ex.: 2º Informática"
+                            value="{{ turma or '' }}"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="produto" class="form-label">
+                            Produto
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="produto"
+                            name="item_id"
+                            required>
+
+                            <option value="">
+                                Selecione um produto
+                            </option>
+
+                            {% for produto in menu %}
+                            <option value="{{ produto.id }}" {% if selected_id == produto.id %}selected{% endif %}>
+                                {{ produto.nome }} — R$ {{ "%.2f" | format(produto.preco) }}
+                            </option>
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="quantidade" class="form-label">
+                            Quantidade
+                        </label>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="quantidade"
+                            name="quantidade"
+                            min="1"
+                            value="1"
+                            required>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label for="observacao" class="form-label">
+                            Observações
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="observacao"
+                            name="observacao"
+                            rows="3"
+                            placeholder="Ex.: sem molho, retirar cebola..."></textarea>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+
+                        <a href="/" class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger">
+
+                            Confirmar Pedido
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

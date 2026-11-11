@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cardápio | CantinaTech</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Fonte Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fffafa, #fff0f1, #fff7f7);
+            color: #343434;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Decoração do fundo */
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 240px;
+            height: 240px;
+            background: linear-gradient(135deg, #ffb8c0, #ffe0e3);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -150px;
+            left: -100px;
+        }
+
+        body::after {
+            bottom: -160px;
+            right: -100px;
+        }
+
+        .main-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+        /* LOGO */
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo-symbol {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, #f21d38, #c90020);
+            border-radius: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 18px rgba(227, 24, 55, 0.20);
+        }
+
+        .logo-symbol svg {
+            width: 65px;
+            height: 65px;
+        }
+
+        .logo-name {
+            font-size: clamp(27px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #ed1b36;
+        }
+
+        .logo-name span {
+            color: #292929;
+        }
+
+        .logo-decoration {
+            width: 100px;
+            height: 55px;
+            position: relative;
+            margin: 0 5px;
+        }
+
+        .logo-decoration::before,
+        .logo-decoration::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            height: 9px;
+            border-radius: 20px;
+            background: #ffb6bf;
+        }
+
+        .logo-decoration::before {
+            width: 100px;
+            top: 9px;
+        }
+
+        .logo-decoration::after {
+            width: 65px;
+            top: 34px;
+        }
+
+        .slogan {
+            font-size: 19px;
+            color: #e31837;
+            font-style: italic;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .slogan::after {
+            content: "";
+            display: block;
+            width: 220px;
+            height: 5px;
+            background: #e31837;
+            border-radius: 50%;
+            margin: 8px auto;
+        }
+
+        /* TÍTULO */
+
+        .page-title {
+            text-align: center;
+            margin: 15px 0 25px;
+        }
+
+        .page-title h1 {
+            color: #e31837;
+            font-size: clamp(38px, 6vw, 65px);
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .page-title p {
+            font-size: 17px;
+            color: #555;
+        }
+
+        /* BOTÕES SUPERIORES */
+
+        .top-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .top-buttons a {
+            padding: 9px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        /* CARD PRINCIPAL */
+
+        .menu-card {
+            border: 1px solid #ffd0d5;
+            border-radius: 22px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.75);
+            box-shadow: 0 12px 28px rgba(227, 24, 55, 0.10);
+        }
+
+        .menu-header {
+            background: linear-gradient(100deg, #e90024, #f21b36, #d90022);
+            color: white;
+            padding: 14px 35px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .menu-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .menu-header svg {
+            width: 55px;
+            height: 55px;
+        }
+
+        .menu-body {
+            padding: 10px 25px 15px;
+        }
+
+        .menu-subtitle {
+            text-align: center;
+            color: #e31837;
+            font-size: 23px;
+            font-weight: 700;
+            margin: 0 0 12px;
+        }
+
+        /* PRODUTOS */
+
+        .product-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-item {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 150px 145px;
+            align-items: center;
+            gap: 15px;
+            padding: 9px 13px;
+            border-bottom: 1px solid #ffd5d9;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+
+        .product-item:nth-child(even) {
+            background: rgba(255, 225, 229, 0.38);
+        }
+
+        .product-item:hover {
+            background: #ffe9ec;
+        }
+
+        .product-name {
+            color: #e31837;
+            font-size: 21px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .product-description {
+            color: #4d4d4d;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 4px 0 0;
+        }
+
+        .product-price {
+            color: #000000;
+            font-size: 22px;
+            font-weight: 800;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .product-button {
+            background: linear-gradient(100deg, #ed102e, #d90022);
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .product-button:hover {
+            background: #b9001c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* BOTÃO PRINCIPAL */
+
+        .menu-footer {
+            padding: 0 12px 12px;
+        }
+
+        .main-order-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(100deg, #e90024, #f21b36, #d90022);
+            border-radius: 17px;
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .main-order-button:hover {
+            background: #bd001f;
+            color: white;
+        }
+
+        /* VOLTAR */
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 11px 35px;
+            border: 2px solid #e31837;
+            border-radius: 30px;
+            color: #e31837;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .back-button:hover {
+            background: #e31837;
+            color: white;
+        }
+
+        footer {
+            margin-top: 35px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 650px) {
+
+            .main-container {
+                padding: 25px 12px;
+            }
+
+            .logo-decoration {
+                display: none;
+            }
+
+            .logo {
+                gap: 10px;
+            }
+
+            .logo-symbol {
+                width: 58px;
+                height: 58px;
+                border-radius: 15px;
+            }
+
+            .logo-symbol svg {
+                width: 45px;
+                height: 45px;
+            }
+
+            .logo-name {
+                font-size: 29px;
+                letter-spacing: -1px;
+            }
+
+            .page-title p {
+                font-size: 14px;
+            }
+
+            .menu-header {
+                padding: 13px 18px;
+            }
+
+            .menu-header h3 {
+                font-size: 22px;
+            }
+
+            .menu-body {
+                padding: 12px;
+            }
+
+            .menu-subtitle {
+                font-size: 18px;
+            }
+
+            .product-item {
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 5px;
+                padding: 13px 7px;
+            }
+
+            .product-name {
+                font-size: 17px;
+            }
+
+            .product-description {
+                font-size: 12px;
+            }
+
+            .product-price {
+                font-size: 17px;
+                grid-column: 1;
+                text-align: left;
+            }
+
+            .product-button {
+                grid-column: 2;
+                grid-row: 1 / span 2;
+                font-size: 12px;
+                padding: 9px;
+            }
+
+            .main-order-button {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <!-- LOGO -->
+    <header class="logo-area">
+
+        <div class="d-flex justify-content-center align-items-center">
+
+            <div class="logo-decoration"></div>
+
+            <a href="{{ url_for('login') }}" class="logo" aria-label="CantinaTech — voltar ao início">
+
+                <div class="logo-symbol">
+
+                    <svg viewBox="0 0 100 100" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <path d="M5 35 H35"
+                              stroke="white" stroke-width="7"
+                              stroke-linecap="round"/>
+
+                        <path d="M2 50 H27"
+                              stroke="white" stroke-width="7"
+                              stroke-linecap="round"/>
+
+                        <path d="M8 65 H35"
+                              stroke="white" stroke-width="7"
+                              stroke-linecap="round"/>
+
+                        <path d="M27 73 H91"
+                              stroke="white" stroke-width="7"
+                              stroke-linecap="round"/>
+
+                        <path d="M35 67 C35 43 48 29 61 29 C75 29 87 43 87 67 Z"
+                              fill="white"/>
+
+                        <path d="M61 20 V28"
+                              stroke="white" stroke-width="6"
+                              stroke-linecap="round"/>
+
+                    </svg>
+
+                </div>
+
+                <div class="logo-name">
+                    Cantina<span>Tech</span>
+                </div>
+
+            </a>
+
+            <div class="logo-decoration"
+                 style="transform: scaleX(-1);"></div>
+
+        </div>
+
+        <p class="slogan">
+            Comida boa, rapidinho!
+        </p>
+
+    </header>
+
+    <!-- TÍTULO -->
+    <section class="page-title">
+
+        <h1>Cardápio</h1>
+
+        <p>
+            Confira os produtos disponíveis na CantinaTech e escolha o que deseja pedir.
+        </p>
+
+    </section>
+
+    <!-- BOTÕES -->
+    <div class="top-buttons">
+
+        <a href="{{ url_for('meus_pedidos') }}"
+           class="btn btn-outline-danger">
+            Meus pedidos
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="btn btn-outline-secondary">
+            Sair da conta
+        </a>
+
+    </div>
+
+    <!-- CARDÁPIO -->
+    <main class="menu-card">
+
+        <div class="menu-header">
+
+            <svg viewBox="0 0 100 100" fill="none"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <path d="M13 75 H88"
+                      stroke="white" stroke-width="7"
+                      stroke-linecap="round"/>
+
+                <path d="M25 69 C25 42 40 26 52 26 C68 26 81 43 81 69 Z"
+                      fill="white"/>
+
+                <path d="M52 18 V26"
+                      stroke="white" stroke-width="6"
+                      stroke-linecap="round"/>
+
+            </svg>
+
+            <h3>Nossas Opções</h3>
+
+        </div>
+
+        <div class="menu-body">
+
+            <h4 class="menu-subtitle">
+                Temos excelentes opções para você!
+            </h4>
+
+            <ul class="product-list">
+
+                <!-- 10 PRODUTOS NOVOS -->
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🥪 Sanduíche de frango</h5>
+                        <p class="product-description">Pão integral com frango grelhado, alface e tomate.</p>
+                    </div>
+                    <span class="product-price">R$ 15,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=1" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🥗 Salada vegetariana</h5>
+                        <p class="product-description">Mix de folhas, cenoura ralada e grão-de-bico.</p>
+                    </div>
+                    <span class="product-price">R$ 12,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=2" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🌯 Wrap sem glúten</h5>
+                        <p class="product-description">Wrap leve com frango, queijo branco e legumes.</p>
+                    </div>
+                    <span class="product-price">R$ 18,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=3" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍔 Hambúrguer de grão-de-bico</h5>
+                        <p class="product-description">Hambúrguer vegano com molho especial e salada.</p>
+                    </div>
+                    <span class="product-price">R$ 16,50</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=4" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍹 Suco natural</h5>
+                        <p class="product-description">Suco de laranja com cenoura, sem açúcar adicionado.</p>
+                    </div>
+                    <span class="product-price">R$ 8,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=5" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🥟 Pastel de carne com queijo</h5>
+                        <p class="product-description">Pastel crocante recheado com carne, queijo e temperos.</p>
+                    </div>
+                    <span class="product-price">R$ 10,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=6" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🧀 Pão de queijo</h5>
+                        <p class="product-description">Pães de queijo quentinhos e fofinhos.</p>
+                    </div>
+                    <span class="product-price">R$ 6,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=7" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🥧 Calzone</h5>
+                        <p class="product-description">Calzone recheado com molho, queijo e ingredientes à escolha.</p>
+                    </div>
+                    <span class="product-price">R$ 17,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=8" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍗 Coxinha de frango com catupiry</h5>
+                        <p class="product-description">Coxinha dourada com recheio cremoso de frango e catupiry.</p>
+                    </div>
+                    <span class="product-price">R$ 9,50</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=9" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍰 Rocambole</h5>
+                        <p class="product-description">Rocambole doce recheado com creme e cobertura açucarada.</p>
+                    </div>
+                    <span class="product-price">R$ 14,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=10" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <!-- 7 OPÇÕES ANTIGAS -->
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍗 Frango desfiado</h5>
+                        <p class="product-description">Frango desfiado e temperado, pronto para acompanhar seu lanche.</p>
+                    </div>
+                    <span class="product-price">R$ 6,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=11" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍔 Big mac</h5>
+                        <p class="product-description">Hambúrguer com carne, queijo, alface e molho especial.</p>
+                    </div>
+                    <span class="product-price">R$ 10,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=12" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🌯 Rap 10</h5>
+                        <p class="product-description">Massa leve recheada com ingredientes saborosos.</p>
+                    </div>
+                    <span class="product-price">R$ 6,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=13" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍨 Sundae</h5>
+                        <p class="product-description">Sobremesa cremosa com cobertura doce.</p>
+                    </div>
+                    <span class="product-price">R$ 4,50</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=14" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🍧 Açai completo</h5>
+                        <p class="product-description">Açaí cremoso acompanhado de complementos variados.</p>
+                    </div>
+                    <span class="product-price">R$ 10,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=15" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">☕ café/capuccino</h5>
+                        <p class="product-description">Bebida quente e cremosa, perfeita para qualquer momento.</p>
+                    </div>
+                    <span class="product-price">R$ 3,50</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=16" class="product-button">Fazer Pedido</a>
+                </li>
+
+                <li class="product-item">
+                    <div>
+                        <h5 class="product-name">🥟 pastel (carne, catupiry, 4 queijos, pizza)</h5>
+                        <p class="product-description">Pastel crocante com opções de recheio de carne, catupiry, quatro queijos ou pizza.</p>
+                    </div>
+                    <span class="product-price">R$ 6,00</span>
+                    <a href="{{ url_for('pedido_page') }}?item_id=17" class="product-button">Fazer Pedido</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="menu-footer">
+
+            <a href="/pedido" class="main-order-button">
+                🛒 Fazer Pedido
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- VOLTAR -->
+    <div class="text-center">
+
+        <a href="{{ url_for('login') }}" class="back-button">
+            ❮ &nbsp; Voltar para a Página Inicial
+        </a>
+
+    </div>
+
+    <!-- RODAPÉ -->
+    <footer class="text-center">
+        © 2026 CantinaTech. Todos os direitos reservados.
+    </footer>
+
+</div>
+
+</body>
+</html>

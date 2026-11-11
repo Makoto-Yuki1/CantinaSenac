@@ -1,0 +1,231 @@
+{
+    "users": [
+        {
+            "username": "b n",
+            "password": "nm,",
+            "restricoes": [],
+            "preferencias": []
+        }
+    ],
+    "menu": [
+        {
+            "id": 1,
+            "nome": "Sanduíche de frango",
+            "descricao": "Pão integral com frango grelhado, alface e tomate.",
+            "ingredientes": [
+                "frango",
+                "pão integral",
+                "alface",
+                "tomate"
+            ],
+            "restricoes": [
+                "sem lactose"
+            ],
+            "tipo": "proteína",
+            "preco": 15.0
+        },
+        {
+            "id": 2,
+            "nome": "Salada vegetariana",
+            "descricao": "Mix de folhas, cenoura ralada e grão-de-bico.",
+            "ingredientes": [
+                "alface",
+                "cenoura",
+                "grão-de-bico",
+                "molho de ervas"
+            ],
+            "restricoes": [
+                "vegetariano",
+                "vegano",
+                "sem glúten",
+                "sem lactose"
+            ],
+            "tipo": "vegetariano",
+            "preco": 12.0
+        },
+        {
+            "id": 3,
+            "nome": "Wrap sem glúten",
+            "descricao": "Wrap leve com frango, queijo branco e legumes.",
+            "ingredientes": [
+                "frango",
+                "tortilla sem glúten",
+                "queijo branco",
+                "legumes"
+            ],
+            "restricoes": [
+                "sem glúten"
+            ],
+            "tipo": "prato leve",
+            "preco": 18.0
+        },
+        {
+            "id": 4,
+            "nome": "Hambúrguer de grão-de-bico",
+            "descricao": "Hambúrguer vegano com molho especial e salada.",
+            "ingredientes": [
+                "grão-de-bico",
+                "aveia",
+                "alface",
+                "tomate"
+            ],
+            "restricoes": [
+                "vegetariano",
+                "vegano",
+                "sem lactose"
+            ],
+            "tipo": "vegano",
+            "preco": 16.5
+        },
+        {
+            "id": 5,
+            "nome": "Suco natural",
+            "descricao": "Suco de laranja com cenoura, sem açúcar adicionado.",
+            "ingredientes": [
+                "laranja",
+                "cenoura",
+                "água"
+            ],
+            "restricoes": [
+                "vegano",
+                "sem glúten",
+                "sem lactose",
+                "sem açúcar"
+            ],
+            "tipo": "bebida",
+            "preco": 8.0
+        },
+        {
+            "id": 6,
+            "nome": "Pastel de carne com queijo",
+            "descricao": "Pastel crocante recheado com carne, queijo e temperos.",
+            "ingredientes": [
+                "carne",
+                "queijo",
+                "massa",
+                "tempero"
+            ],
+            "restricoes": [
+                "contém glúten",
+                "contém lactose"
+            ],
+            "tipo": "salgado",
+            "preco": 10.0
+        },
+        {
+            "id": 7,
+            "nome": "Pão de queijo",
+            "descricao": "Pães de queijo quentinhos e fofinhos.",
+            "ingredientes": [
+                "polvilho",
+                "queijo",
+                "ovos",
+                "óleo"
+            ],
+            "restricoes": [
+                "sem glúten"
+            ],
+            "tipo": "lanchinho",
+            "preco": 6.0
+        },
+        {
+            "id": 8,
+            "nome": "Calzone",
+            "descricao": "Calzone recheado com molho, queijo e ingredientes à escolha.",
+            "ingredientes": [
+                "massa",
+                "molho",
+                "queijo",
+                "recheio"
+            ],
+            "restricoes": [
+                "contém glúten",
+                "contém lactose"
+            ],
+            "tipo": "salgado",
+            "preco": 17.0
+        },
+        {
+            "id": 9,
+            "nome": "Coxinha de frango com catupiry",
+            "descricao": "Coxinha dourada com recheio cremoso de frango e catupiry.",
+            "ingredientes": [
+                "frango",
+                "catupiry",
+                "massa",
+                "óleo"
+            ],
+            "restricoes": [
+                "contém glúten",
+                "contém lactose"
+            ],
+            "tipo": "salgado",
+            "preco": 9.5
+        },
+        {
+            "id": 10,
+            "nome": "Rocambole",
+            "descricao": "Rocambole doce recheado com creme e cobertura açucarada.",
+            "ingredientes": [
+                "ovos",
+                "açúcar",
+                "farinha",
+                "creme"
+            ],
+            "restricoes": [
+                "contém glúten",
+                "contém lactose"
+            ],
+            "tipo": "doce",
+            "preco": 14.0
+        },
+         {
+        "id": 11,
+        "nome": "Rap 10 Sanduíche",
+        "descricao": "Pão macio, hambúrguer, queijo e molho especial.",
+        "preco": 10.00
+    },
+    {
+        "id": 12,
+        "nome": "Frango Desfiado",
+        "descricao": "Pão integral com frango desfiado e temperos especiais.",
+        "preco": 12.00
+    },
+    {
+        "id": 13,
+        "nome": "X-Tudo",
+        "descricao": "Pão, hambúrguer duplo, queijo, alface e molho especial.",
+        "preco": 18.00
+    },
+    {
+        "id": 14,
+        "nome": "Hot Dog",
+        "descricao": "Salsicha, pão macio e acompanhamentos.",
+        "preco": 14.00
+    },
+    {
+        "id": 15,
+        "nome": "Misto Quente",
+        "descricao": "Pão de forma, queijo e presunto.",
+        "preco": 10.00
+    },
+    {
+        "id": 16,
+        "nome": "Tapioca",
+        "descricao": "Tapioca recheada com queijo, presunto ou frango.",
+        "preco": 13.00
+    },
+    {
+        "id": 17,
+        "nome": "Salada Especial",
+        "descricao": "Salada fresca com frango, alface, tomate e cenoura.",
+        "preco": 16.00
+    }
+   
+    ],
+    "admin": {
+        "id": "unico",
+        "admin_username": "admin",
+        "password": "1234"
+    }
+}

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+     <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Cantina Online</title>
+        <style>
+            .home-logo-area { text-align: center; margin: 28px auto 34px; }
+            .home-logo { display: inline-flex; align-items: center; justify-content: center; gap: 16px; text-decoration: none; }
+            .home-logo-symbol { width: 85px; height: 85px; background: linear-gradient(135deg, #f21d38, #c90020); border-radius: 22px; display: flex; justify-content: center; align-items: center; box-shadow: 0 8px 18px rgba(227, 24, 55, .20); }
+            .home-logo-symbol svg { width: 65px; height: 65px; }
+            .home-logo-name { font-size: clamp(29px, 5vw, 48px); font-weight: 800; letter-spacing: -2px; color: #ed1b36; }
+            .home-logo-name span { color: #292929; }
+            .home-logo-decoration { width: 100px; height: 55px; position: relative; margin: 0 5px; }
+            .home-logo-decoration::before, .home-logo-decoration::after { content: ""; position: absolute; right: 0; height: 9px; border-radius: 20px; background: #ffb6bf; }
+            .home-logo-decoration::before { width: 100px; top: 9px; }
+            .home-logo-decoration::after { width: 65px; top: 34px; }
+            .home-slogan { color: #e31837; font-style: italic; font-weight: 600; font-size: 19px; margin: 10px 0 0; }
+            .home-slogan::after { content: ""; display: block; width: 220px; height: 5px; background: #e31837; border-radius: 50%; margin: 8px auto; }
+            @media (max-width: 650px) {
+                .home-logo-decoration { display: none; }
+                .home-logo { gap: 10px; }
+                .home-logo-symbol { width: 58px; height: 58px; border-radius: 15px; }
+                .home-logo-symbol svg { width: 45px; height: 45px; }
+                .home-logo-name { font-size: 29px; letter-spacing: -1px; }
+            }
+        </style>
+  </head>
+  <body>
+
+        <header class="home-logo-area">
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="home-logo-decoration" aria-hidden="true"></div>
+                <a href="{{ url_for('login') }}" class="home-logo" aria-label="CantinaTech — página inicial">
+                    <div class="home-logo-symbol" aria-hidden="true">
+                        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 35 H35" stroke="white" stroke-width="7" stroke-linecap="round"/>
+                            <path d="M2 50 H27" stroke="white" stroke-width="7" stroke-linecap="round"/>
+                            <path d="M8 65 H35" stroke="white" stroke-width="7" stroke-linecap="round"/>
+                            <path d="M27 73 H91" stroke="white" stroke-width="7" stroke-linecap="round"/>
+                            <path d="M35 67 C35 43 48 29 61 29 C75 29 87 43 87 67 Z" fill="white"/>
+                            <path d="M61 20 V28" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <span class="home-logo-name">Cantina<span>Tech</span></span>
+                </a>
+                <div class="home-logo-decoration" style="transform: scaleX(-1);" aria-hidden="true"></div>
+            </div>
+            <p class="home-slogan">Comida boa, rapidinho!</p>
+        </header>
+    
+    <div class="bg-light rounded-4 p-5 shadow-sm text-center mb-5">
+
+    <h1 class="display-4 fw-bold text-danger">
+    </h1>
+
+    <p class="lead mt-3">
+        Faça seu pedido antecipadamente e retire na cantina sem enfrentar filas.
+        Mais praticidade, rapidez e organização para alunos e funcionários.
+    </p>
+
+    <div class="mt-4">
+
+        <a href="{{ url_for('cardapio') }}" class="btn btn-danger btn-lg me-2">
+            Ver Cardápio
+        </a>
+
+        <a href="{{ url_for('pedido_page') }}" class="btn btn-outline-danger btn-lg">
+            Fazer Pedido
+        </a>
+        <a href="{{ url_for('meus_pedidos') }}" class="btn btn-outline-danger btn-lg">
+            Meus Pedidos
+        </a>
+        <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-lg">
+            Sair da conta
+        </a>
+    </div>
+
+</div>
+
+<!-- Benefícios -->
+<div class="row text-center g-4">
+
+    <div class="col-md-4">
+
+        <div class="card h-100 shadow border-0">
+
+            <div class="card-body">
+
+
+                <h4 class="mt-3">
+                    Rapidez
+                </h4>
+
+                <p>
+                    Faça seu pedido antes do intervalo e retire rapidamente,
+                    evitando filas.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card h-100 shadow border-0">
+
+            <div class="card-body">
+
+
+                <h4 class="mt-3">
+                    Variedade
+                </h4>
+
+                <p>
+                    Consulte o cardápio atualizado com lanches, bebidas e
+                    salgados disponíveis diariamente.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card h-100 shadow border-0">
+
+            <div class="card-body">
+
+
+                <h4 class="mt-3">
+                    Facilidade
+                </h4>
+
+                <p>
+                    Acesse o sistema de qualquer dispositivo e acompanhe seus
+                    pedidos de forma simples.
+                </p>
+
+            </div>
+
+        </div>
+ </div>
+</div>
+
+<!-- Sobre -->
+<div class="card mt-5 shadow border-0">
+
+    <div class="card-body p-5">
+
+        <h2 class="text-danger mb-4">
+            Sobre a CantinaTech
+        </h2>
+
+        <p class="fs-5">
+
+            A CantinaTech foi desenvolvida para facilitar a realização de
+            pedidos antecipados na cantina escolar. O sistema permite que os
+            alunos escolham seus produtos com antecedência, reduzindo filas e
+            melhorando a organização do atendimento.
+
+        </p>
+
+        <p>
+
+            O projeto foi desenvolvido utilizando Python, Flask, HTML, CSS,
+            Bootstrap e SQLAlchemy com SQLite para armazenamento das informações,
+            oferecendo uma interface simples, intuitiva e acessível.
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="text-center mt-5">
+
+    <h3 class="mb-4">
+        Pronto para fazer seu pedido?
+    </h3>
+
+    <a href="/pedido" class="btn btn-lg btn-success">
+    </a>
+
+    <p class="mt-4">
+        <a href="{{ url_for('admin_login') }}" class="link-secondary">Acesso da cantina</a>
+    </p>
+
+</div>
+  </body>
+</html>
